@@ -1,3 +1,7 @@
+/*
+That code is not working on visual studio code or any other IDE that code working only arduino IDE
+*/
+
 // Pin definitions
 const int ENA = 6;  // PWM pin to control motor speed
 const int IN1 = 3;   // Motor driver IN1 pin
@@ -28,5 +32,5 @@ void setup() {
 }
 
 void loop() {
-    
+
 }

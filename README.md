@@ -15,7 +15,7 @@ This project uses hand gestures to control the speed and power of a fan motor. T
 ## Overview
 
 The project detects different hand gestures via a webcam and uses the detected signals to control a fan motor connected to an Arduino board. The gestures include:
-- **🤟**: Fan ON at max speed
+- **🤟**: Fan ON at costant speed
 - **🤚**: Fan OFF
 - **👎**: Fan speed decrease
 - **👍**: Fan speed increase
@@ -79,7 +79,7 @@ The project detects different hand gestures via a webcam and uses the detected s
 2. Ensure that the Arduino is connected to the correct COM port.
 
 3. Use the following gestures to control the fan:
-    - **🤟**: Fan ON at max speed
+    - **🤟**: Fan ON at constant speed
     - **🤚**: Fan OFF
     - **👎**: Fan speed decrease
     - **👍**: Fan speed increase

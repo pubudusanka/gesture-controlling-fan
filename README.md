@@ -9,6 +9,7 @@ This project uses hand gestures to control the speed and power of a fan motor. T
 - [Features](#features)
 - [How It Works](#how-it-works)
 - [Installation](#installation)
+- [Connecton Setup](#connection-setup)
 - [Usage](#usage)
 
 
@@ -23,11 +24,11 @@ The project detects different hand gestures via a webcam and uses the detected s
 ## Hardware Requirements
 
 - Arduino Uno
-- A4988 Motor Driver
+- L298n Motor Driver
 - DC Motor
 - Webcam
 - Breadboard and Jumper Wires
-- Power Supply for the Motor
+- Power Supply for the Motor (9/12v)
 - Hand Gesture Recognition (via webcam)
 
 ## Software Requirements
@@ -68,6 +69,14 @@ The project detects different hand gestures via a webcam and uses the detected s
 2. **Arduino Setup**:
     - Install the Arduino IDE from [arduino.cc](https://www.arduino.cc/en/software)
     - Upload the Arduino code provided below to your Arduino Uno.
+
+## Connecton Setup
+
+- Connect the DC motor to the L298n motor driver. (Out 1, Out 2)
+- Connect the L298n motor driver to the Arduino (L298n ENA to Arduino PWM pin6, L298n IN1 and IN2 to Arduino PWM 3 and 5)
+- L298n GND to Arduino GND
+- L298n 5v to Arduino 5v
+- L298n 12v to powersupply (9/12v)
 
 ## Usage
 

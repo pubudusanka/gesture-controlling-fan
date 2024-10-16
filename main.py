@@ -280,6 +280,29 @@ while True:
         for handLms in results.multi_hand_landmarks:
             img_shape = img.shape
 
+            #Turn on & max speed function
+            if turn_on(handLms,img_shape):
+                current_gesture = "Turn On Fan & Speed Set to Medium"
+                cv2.putText(img, str('Turn On'), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 223, 0), 2)
+                arduino.write(b'1')
+                arduino.write(str(onSpeed).encode())
+                print("=========================================")
+                print(current_gesture)
+                print(f"Sent {onSpeed} to Arduino")
+
+                # Wait for a response from Arduino
+                time.sleep(1)
+                response = arduino.readline().decode('utf-8').strip()  # Read and decode response
+                if response:
+                    print("Arduino response: Speed set to Medium ")
+                    print("=========================================")
+                else:
+                    print("No response from Arduino")
+                    print("=========================================")
+            #end of Turn-on & max speed function
+
+            
+
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)

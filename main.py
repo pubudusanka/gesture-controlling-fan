@@ -268,3 +268,26 @@ def increase_speed():
         speed += 50
         speed = min(speed,255)
     return speed
+
+#Main Functions for gestures
+
+while True:
+    success, img = cap.read()
+    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    results = hands.process(imgRGB)
+    
+    if results.multi_hand_landmarks:
+        for handLms in results.multi_hand_landmarks:
+            img_shape = img.shape
+
+
+    cTime = time.time()
+    fps = 1 / (cTime - pTime)
+    pTime = cTime
+
+    cv2.imshow("Image", img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()

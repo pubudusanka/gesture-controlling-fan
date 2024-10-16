@@ -260,3 +260,11 @@ def decrease_speed():
         speed -= 50
         speed = max(speed,0)
     return speed
+
+#Methods to Increase Speed
+def increase_speed():
+    global speed
+    if speed < 255:
+        speed += 50
+        speed = min(speed,255)
+    return speed

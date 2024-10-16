@@ -252,3 +252,11 @@ def speed_up(handLms, img_shape):
     if all_fingers_curled and (thumb_tip_y < thumb_mcp_y) and (index_finger_tip_y > thumb_mcp_y) and (middle_finger_tip_y > thumb_mcp_y) and (ring_finger_tip_y > thumb_mcp_y) and (pinky_tip_y > thumb_mcp_y):
         return True
     return False
+
+#Methods to Decrease Speed
+def decrease_speed():
+    global speed
+    if speed > 0:
+        speed -= 50
+        speed = max(speed,0)
+    return speed

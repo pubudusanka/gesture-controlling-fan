@@ -347,6 +347,29 @@ while True:
                         print("=========================================")
             #end of speed-down function
 
+            #Speed-Up Function
+            elif speed_up(handLms,img_shape):
+                current_gesture = "Medium Speed"
+                cv2.putText(img, str('Medium Speed'), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 223, 0), 2)
+                arduino.write(b'3')
+                if speed < 255:
+                    speed = increase_speed()
+                    arduino.write(str(speed).encode())
+                    print("=========================================")
+                    print(current_gesture)
+                    print(f"Sent {speed} to Arduino")
+
+                    # Wait for a response from Arduino
+                    time.sleep(1)
+                    response = arduino.readline().decode('utf-8').strip()  # Read and decode response
+                    if response:
+                        print("Arduino response: Speed set to Medium ")
+                        print("=========================================")
+                    else:
+                        print("No response from Arduino")
+                        print("=========================================")
+            #end of speed-up function
+
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)

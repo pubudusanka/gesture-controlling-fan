@@ -170,3 +170,44 @@ def turn_off(handLms, img_shape):
     if all_fingers_curled and (thumb_tip_y < thumb_pip_y) and (index_finger_tip_y < index_finger_dip_y) and (middle_finger_tip_y < middle_finger_dip_y) and (ring_finger_tip_y < ring_finger_dip_y) and (pinky_tip_y < pinky_dip_y):
         return True
     return False
+
+#Function to speed down
+def speed_down(handLms, img_shape):
+    h, w, c = img_shape
+    
+    thumb_tip = handLms.landmark[4]
+    thumb_mcp = handLms.landmark[2]
+    index_finger_tip = handLms.landmark[8]
+    middle_finger_tip = handLms.landmark[12]
+    ring_finger_tip = handLms.landmark[16]
+    pinky_tip = handLms.landmark[20]
+
+    thumb_tip_y = int(thumb_tip.y * h)
+    thumb_mcp_y = int(thumb_mcp.y * h)
+    index_finger_tip_y = int(index_finger_tip.y * h)
+    middle_finger_tip_y = int(middle_finger_tip.y * h)
+    ring_finger_tip_y = int(ring_finger_tip.y * h)
+    pinky_tip_y = int(pinky_tip.y * h)
+
+    # Ensure all fingers (except thumb) are curled
+    fingers = {
+        'index': [handLms.landmark[i] for i in [5, 6, 7, 8]],
+        'middle': [handLms.landmark[i] for i in [9, 10, 11, 12]],
+        'ring': [handLms.landmark[i] for i in [13, 14, 15, 16]],
+        'pinky': [handLms.landmark[i] for i in [17, 18, 19, 20]],
+    }
+
+    all_fingers_curled = True
+    for finger_name, landmarks in fingers.items():
+        mcp = (int(landmarks[0].x * w), int(landmarks[0].y * h))
+        pip = (int(landmarks[1].x * w), int(landmarks[1].y * h))
+        dip = (int(landmarks[2].x * w), int(landmarks[2].y * h))
+        tip = (int(landmarks[3].x * w), int(landmarks[3].y * h))
+        
+        if not is_finger_curled(mcp, pip, dip, tip):
+            all_fingers_curled = False
+            break
+
+    if all_fingers_curled and (thumb_tip_y > thumb_mcp_y) and (index_finger_tip_y < thumb_mcp_y) and (middle_finger_tip_y < thumb_mcp_y) and (ring_finger_tip_y < thumb_mcp_y) and (pinky_tip_y < thumb_mcp_y):
+        return True
+    return False

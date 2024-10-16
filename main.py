@@ -301,7 +301,27 @@ while True:
                     print("=========================================")
             #end of Turn-on & max speed function
 
-            
+            #Turn-off function
+            elif turn_off(handLms,img_shape):
+                current_gesture = "Turn Off Fan & Speed Set to speed Zero"
+                cv2.putText(img, str('Turn Off'), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 223, 0), 2)
+                arduino.write(b'0')
+                offSpeed = 0
+                arduino.write(str(offSpeed).encode())
+                print("=========================================")
+                print(current_gesture)
+                print(f"Sent {offSpeed} to Arduino")
+
+                # Wait for a response from Arduino
+                time.sleep(1)
+                response = arduino.readline().decode('utf-8').strip()  # Read and decode response
+                if response:
+                    print("Arduino response: Speed set to Zero ")
+                    print("=========================================")
+                else:
+                    print("No response from Arduino")
+                    print("=========================================")
+            #end of Turn-off function
 
 
     cTime = time.time()

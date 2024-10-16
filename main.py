@@ -323,6 +323,30 @@ while True:
                     print("=========================================")
             #end of Turn-off function
 
+            #Speed-Down Function
+            elif speed_down(handLms,img_shape):
+                current_gesture = "Decrease Speed"
+                cv2.putText(img, str('Decrease Speed'), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 223, 0), 2)
+                arduino.write(b'2')
+                if speed > 0:
+                    speed = decrease_speed()
+                
+                    arduino.write(str(speed).encode())
+                    print("=========================================")
+                    print(current_gesture)
+                    print(f"Sent {speed} to Arduino")
+
+                    # Wait for a response from Arduino
+                    time.sleep(1)
+                    response = arduino.readline().decode('utf-8').strip()  # Read and decode response
+                    if response:
+                        print("Arduino response: Speed set to Low ")
+                        print("=========================================")
+                    else:
+                        print("No response from Arduino")
+                        print("=========================================")
+            #end of speed-down function
+
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
